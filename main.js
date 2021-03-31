@@ -5,20 +5,15 @@ const client = new Discord.Client();
 	require('./events/event_ready.js')(client);
 });*/
 
-const chalk = require('chalk');
-
 client.on('ready', async () =>{
     const serverssize = await client.guilds.cache.size;
 	var usersserver = await client.users.cache.size;
 	const channelssize = await client.channels.cache.size;
     // log
-    console.log(chalk `
-    {blueBright.bold OAWikiBot is Online.}
-    {greenBright.bold.underline -honsda}
+    console.log(`
+    OAWikiBot is Online
     `)
-	console.log(chalk`
-	{magentaBright Serving ${usersserver} users, ${serverssize} servers, ${channelssize} channels.}
-	`);
+	console.log(`Serving ${usersserver} users, ${serverssize} servers, ${channelssize} channels.`);
 // funnybot activity
 	const activities_list = [
 		'quan',

@@ -1,0 +1,18 @@
+{
+  "name": "oawikibot",
+  "version": "0.1.0",
+  "description": "Bot for OA Wiki",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Honsda",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "discord.js": "^12.5.1",
+    "long": "^4.0.0",
+    "moment": "^2.29.1",
+    "ms": "^2.1.3"
+  }
+}

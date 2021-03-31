@@ -1,37 +1,15 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
+const classify = require("./gzor.json")
+const chalk = require('chalk');
+const ms = require('ms')
+const moment = require('moment')
+const long = require('long');
 
-/*client.on('ready', async () =>{
-	require('./events/event_ready.js')(client);
-});*/
+const fs = require('fs');
 
 client.on('ready', async () =>{
-    const serverssize = await client.guilds.cache.size;
-	var usersserver = await client.users.cache.size;
-	const channelssize = await client.channels.cache.size;
-    // log
-    console.log(`
-    OAWikiBot is Online
-    `)
-	console.log(`Serving ${usersserver} users, ${serverssize} servers, ${channelssize} channels.`);
-// funnybot activity
-	const activities_list = [
-		'quan',
-		'bub',
-        'oplk is relevant',
-        'qbastard',
-		`OAWiki - ${usersserver} Users`,
-        'monky',
-        `OAWiki - ${usersserver} Users`,
-        'OpenAnarchy strong',
-        `OAWiki - ${usersserver} Users`
-	];
-	setInterval(() => {
-		const index = Math.floor(Math.random() * (activities_list.length - 1) + 1);
-		client.user.setActivity(activities_list[index], {
-			type: 'WATCHING',
-		}).catch(console.error);
-	}, 10000);
+	require('./events/event_ready.js')(client);
 });
 
 client.on('guildMemberAdd', member => {
@@ -64,4 +42,4 @@ client.on('guildMemberRemove', member => {
     })
 })
 
-client.login(process.env.YPLRM)
+client.login(classify.yplrm)

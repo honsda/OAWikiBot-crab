@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+/*const Discord = require('discord.js');
 const chalk = require('chalk');
 const proj = require('../package.json');
 
@@ -32,4 +32,4 @@ module.exports = async (client) => {
 			type: 'WATCHING',
 		}).catch(console.error);
 	}, 10000);
-};
+};*/

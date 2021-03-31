@@ -1,13 +1,7 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
-const classify = require("./gzor.json")
-const chalk = require('chalk');
-const ms = require('ms')
-const moment = require('moment')
-const long = require('long');
 
 const fs = require('fs');
-const { env } = require('process');
 
 client.on('ready', async () =>{
 	require('./events/event_ready.js')(client);

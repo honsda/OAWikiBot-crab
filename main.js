@@ -52,14 +52,12 @@ client.on('guildMemberRemove', member => {
 /////////////////////////////###////##///###///////////////////////////////////////
 const {mwn} = require('mwn');
 
-//mwn.login('OAWiki Bot', 'f3{(MAY2/2T,tg&^')
-
 const botWiki = new mwn({
 	apiUrl: 'https://openanarchywiki.miraheze.org/w/api.php',
 
 	// Can be skipped if the bot doesn't need to sign in
-	username: 'TheUnknown20@OAWiki_Bot',
-	password: 'jharkf1as5v67bvfrjnkn32ca0k8j0np',
+	username: `${classify.userwiki}`,
+	password: `${classify.sdgg}`,
 
 	// Instead of username and password, you can use OAuth 1.0a to authenticate,
 	// if the wiki has Extension:OAuth enabled

@@ -90,10 +90,11 @@ client.on('message', async message => {
     const args = message.content.slice(prefix.length).split(/ +/);
 	const command = args.shift().toLowerCase();
 
-    if(!message.author.id === '206296798724227082') return;
 	if(!message.content.startsWith(prefix) || message.author.bot) return;
 
-    if(command === 'getimg_block') {
+    if(message.author.id === '206296798724227082'){
+
+    if(command === 'getimg_block' || command === 'getimg') {
         botWiki.request({
             "action": "query",
             "prop": "images",
@@ -111,19 +112,52 @@ client.on('message', async message => {
              message.channel.send(`\`\`\`Output :\`\`\`\n${data.query.pages[0].images.map(img => `https://openanarchywiki.miraheze.org/wiki/${img.title}\n`).join(" ")}`)
         });
     }
-    else if(command === 'delete_test') {
+    else if(command === 'delete_page') {
+        if (!args[0]) {
+            message.channel.send({ embed: new Discord.MessageEmbed()
+                .setTitle('Bad command')
+                .setDescription(`No page was to be deleted.`)
+                .setColor(0xD8D8D8)
+                })
+        }
+        //////
+        else {
         botWiki.request(
             {
                 "action": "delete",
                 "format": "json",
-                "title": "Example",
-                "reason": "trolled",
+                "title": `${args[0]}`,
+                "reason": `${args.slice(1).join(' ')}`,
                 "token": `${botWiki.csrfToken}`,
                 "formatversion": "2"
             }
-        ).then(message.channel.send('Check #wiki-feed i guess?'))
+        ).then(message.channel.send({ embed: new Discord.MessageEmbed()
+            .setTitle('Successfully deleted Page')
+            .setDescription(`\`${args[0]}\` was succesfully deleted.`)
+            .setColor(0xD8D8D8)
+            }))
+        }
+        //
     }
-    else if(command === 'getwiki_tok') {
+    else if(command === 'create_page') {
+        if (!args[0]) {
+            message.channel.send({ embed: new Discord.MessageEmbed()
+                .setTitle('Bad command')
+                .setDescription(`No page name was to be created.`)
+                .setColor(0xD8D8D8)
+                })
+        }
+        //////
+        else {
+        await botWiki.create(`${args[0]}`, '-', `${args.slice(1).join(' ')}`).then(message.channel.send({ embed: new Discord.MessageEmbed()
+            .setTitle('Successfully created Page')
+            .setDescription(`\`${args[0]}\` was succesfully created.`)
+            .setColor(0xD8D8D8)
+            }))
+        }
+    }
+    //
+    else if(command === 'log_token') {
         console.log(botWiki.csrfToken)
         message.channel.send({ embed: new Discord.MessageEmbed()
             .setTitle('Logged CSRF Token in console')
@@ -138,6 +172,7 @@ client.on('message', async message => {
         .setColor(0xEEEEEE)
         }))
     }
+}
 })
 
 client.login(classify.yplrm)

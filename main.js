@@ -53,27 +53,18 @@ client.on('guildMemberRemove', member => {
 const {mwn} = require('mwn');
 
 const botWiki = new mwn({
+    //OAWiki apiUrl
 	apiUrl: 'https://openanarchywiki.miraheze.org/w/api.php',
-
-	// Can be skipped if the bot doesn't need to sign in
+    //login
 	username: `${classify.userwiki}`,
 	password: `${classify.sdgg}`,
 
-	// Instead of username and password, you can use OAuth 1.0a to authenticate,
-	// if the wiki has Extension:OAuth enabled
-	/*OAuthCredentials: {
-		consumerToken: "16_DIGIT_ALPHANUMERIC_KEY",
-		consumerSecret: "20_DIGIT_ALPHANUMERIC_KEY",
-		accessToken: "16_DIGIT_ALPHANUMERIC_KEY",
-		accessSecret: "20_DIGIT_ALPHANUMERIC_KEY"
-	},*/
-
 	// Set your user agent (required for WMF wikis, see https://meta.wikimedia.org/wiki/User-Agent_policy):
-	userAgent: 'OAWiki Bot 1.0.0 mwn/0.10.3',
+	userAgent: 'OAWiki Bot 1.0.3 mwn/0.10.3',
 
 	// Set default parameters to be sent to be included in every API request
 	defaultParams: {
-		assert: 'user' // ensure we're logged in
+		assert: 'user'
 	}
 });
 
@@ -83,93 +74,102 @@ botWiki.setOptions({
 	maxRetries: 3, // attempt to retry a failing requests upto 3 times
     formatversion: 2
 });
+//improper non-dynamical command handler
+client.on('message', async message => {
+    require('./events/cmd_message.js')(message, client, botWiki, prefix);
+})
 
 client.on('message', async message => {
-    const args = message.content.slice(prefix.length).split(/ +/);
-	const command = args.shift().toLowerCase();
+    //DISPLAYS TEMPORARY IMAGE IN LOCAL SYSTEM
+const args = message.content.slice(prefix.length).split(/ /);
+const command = args.shift().toLowerCase();
 
-	if(!message.content.startsWith(prefix) || message.author.bot) return;
-
-    if(message.author.id === '206296798724227082'){
-
-    if(command === 'getimg_block' || command === 'getimg') {
-        botWiki.request({
-            "action": "query",
-            "prop": "images",
-            "titles": args[0]
-        }).then(data => {
-             message.channel.send(`\`\`\`Output :\`\`\`\n\`\`\`${data.query.pages[0].images.map(img => `https://openanarchywiki.miraheze.org/wiki/${img.title}\n`).join(" ")}\`\`\``)
-        });
-    }
-    else if(command === 'getimg_free') {
-        botWiki.request({
-            "action": "query",
-            "prop": "images",
-            "titles": args[0]
-        }).then(data => {
-             message.channel.send(`\`\`\`Output :\`\`\`\n${data.query.pages[0].images.map(img => `https://openanarchywiki.miraheze.org/wiki/${img.title}\n`).join(" ")}`)
-        });
-    }
-    else if(command === 'delete_page') {
-        if (!args[0]) {
-            message.channel.send({ embed: new Discord.MessageEmbed()
-                .setTitle('Bad command')
-                .setDescription(`No page was to be deleted.`)
-                .setColor(0xD8D8D8)
-                })
-        }
-        //////
-        else {
-        botWiki.request(
-            {
-                "action": "delete",
-                "format": "json",
-                "title": `${args[0]}`,
-                "reason": `${args.slice(1).join(' ')}`,
-                "token": `${botWiki.csrfToken}`,
-                "formatversion": "2"
-            }
-        ).then(message.channel.send({ embed: new Discord.MessageEmbed()
-            .setTitle('Successfully deleted Page')
-            .setDescription(`\`${args[0]}\` was succesfully deleted.`)
-            .setColor(0xD8D8D8)
-            }))
-        }
-        //
-    }
-    else if(command === 'create_page') {
-        if (!args[0]) {
-            message.channel.send({ embed: new Discord.MessageEmbed()
-                .setTitle('Bad command')
-                .setDescription(`No page name was to be created.`)
-                .setColor(0xD8D8D8)
-                })
-        }
-        //////
-        else {
-        await botWiki.create(`${args[0]}`, '-', `${args.slice(1).join(' ')}`).then(message.channel.send({ embed: new Discord.MessageEmbed()
-            .setTitle('Successfully created Page')
-            .setDescription(`\`${args[0]}\` was succesfully created.`)
-            .setColor(0xD8D8D8)
-            }))
-        }
-    }
-    //
-    else if(command === 'log_token') {
-        console.log(botWiki.csrfToken)
+if(!message.content.startsWith(prefix) || message.author.bot) return;
+//GET IMAGES IN 'A' WIKI PAGE (WITH CODE BLOCK)
+if(command === 'getimg_block' || command === 'getimg') {
+    botWiki.request({
+        "action": "query",
+        "prop": "images",
+        "titles": args[0]
+    }).then(data => {
+         message.channel.send(`\`\`\`Output :\`\`\`\n\`\`\`${data.query.pages[0].images.map(img => `https://openanarchywiki.miraheze.org/wiki/${img.title}\n`).join(" ")}\`\`\``)
+    });
+}
+//GET IMAGES IN 'A' WIKI PAGE (WITHOUT CODE BLOCK)
+else if(command === 'getimg_free') {
+    botWiki.request({
+        "action": "query",
+        "prop": "images",
+        "titles": args[0]
+    }).then(data => {
+         message.channel.send(`\`\`\`Output :\`\`\`\n${data.query.pages[0].images.map(img => `https://openanarchywiki.miraheze.org/wiki/${img.title}\n`).join(" ")}`)
+    });
+}
+else if(command === 'display_img') {
+    const endExt = args.slice(0).join(' ').length
+    const dotExt = args.slice(0).join(' ').lastIndexOf('.')
+    const extFile = args.slice(0).join(' ').slice(dotExt, endExt)
+    const tempImg = await botWiki.download(`File:${args.slice(0).join(' ')}`, `./images/tempImage${extFile}`)
+    //console.log(extFile)
+    //console.log(endExt)
+    //console.log(dotExt)
+    message.channel.send({  embed: {
+        image: {
+             url: `attachment://tempImage${extFile}`
+          },
+        title: "Here is the file you requested for.",
+        color: 15658734
+       },
+       files: [{
+          attachment: `./images/tempImage${extFile}`,
+          name: `tempImage${extFile}`
+       }]
+    })
+}
+//UPLOADS ATTACHED IMAGE TO WIKI
+else if(command === 'upload_img') {
+    const imageURL = message.attachments.map(img => img.url).join(' ')
+    const imageNAME = message.attachments.map(img => img.name).join(' ')
+    if (!message.attachments) {
         message.channel.send({ embed: new Discord.MessageEmbed()
-            .setTitle('Logged CSRF Token in console')
-            .setDescription('CSRF Token successfully logged.')
-            .setColor(0xEEEEEE)
+            .setTitle('Bad command')
+            .setDescription(`No attached file was going to be uploaded.`)
+            .setColor(0xD8D8D8)
             })
     }
-    else if(command === 'login') {
-        botWiki.login().then(message.channel.send({ embed: new Discord.MessageEmbed()
-        .setTitle('Success')
-        .setDescription('Logged in successfully to the wiki.')
-        .setColor(0xEEEEEE)
-        }))
+    else{
+    botWiki.request(
+        {
+            "action": "upload",
+            "format": "json",
+            "filename": `${imageNAME}`,
+            "url": `${imageURL}`,
+            "comment": `Uploaded by ${message.author.tag}, From Discord.`,
+            "token": `${botWiki.csrfToken}`,
+            "formatversion": "2",
+        }
+    ).then(
+        message.channel.send({ embed: new Discord.MessageEmbed()
+            .setTitle('Successfully uploaded file')
+            .setDescription('The file you requested is successfully uploaded to the Wiki.')
+            .setColor(0xEEEEEE)
+            })
+    )
+        }
+}
+else if(command === 'login') {
+    botWiki.login().then(message.channel.send({ embed: new Discord.MessageEmbed()
+    .setTitle('Success')
+    .setDescription('Logged in successfully to the wiki.')
+    .setColor(0xEEEEEE)
+    }))
     }
+else if(command === 'cmd') {
+    message.channel.send({ embed: new Discord.MessageEmbed()
+        .setTitle('Commands')
+        .setDescription('\`login\`, \`display_img\`, \`upload_img\`, \`getimg\`, \`getimg_free\`')
+        .setColor(0xEEEEEE)
+        })
 }
 })
 

@@ -4,7 +4,7 @@ const proj = require('../package.json');
 
 module.exports = async (client) => {
     const serverssize = await client.guilds.cache.size;
-	var usersserver = await client.users.cache.size;
+	var usersserver = client.users.cache.size;
 	const channelssize = await client.channels.cache.size;
     // log
     console.log(chalk `
@@ -24,7 +24,13 @@ module.exports = async (client) => {
         'monky',
         `OAWiki - ${usersserver} Users`,
         'OpenAnarchy strong',
-        `OAWiki - ${usersserver} Users`
+        `OAWiki - ${usersserver} Users`,
+		'bub apple',
+		'daaaalarp',
+		'tfw realm angels thrive',
+		'team pingu on top',
+		'myself',
+		'me swp fan big'
 	];
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (activities_list.length - 1) + 1);

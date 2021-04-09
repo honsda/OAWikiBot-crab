@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const {mwn} = require('mwn');
-
+//fart
 function wikiLogin() {
     try {
         botWiki.login()

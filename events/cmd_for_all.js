@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const mwn = require('mwn')
-
+//fart
 module.exports = async (message, client, botWiki, prefix) => {
         //DISPLAYS TEMPORARY IMAGE IN LOCAL SYSTEM
 const args = message.content.slice(prefix.length).split(/ /);

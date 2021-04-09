@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
 const proj = require('../package.json');
-
+//fart
 module.exports = async (client) => {
     const serverssize = await client.guilds.cache.size;
 	var usersserver = client.users.cache.size;

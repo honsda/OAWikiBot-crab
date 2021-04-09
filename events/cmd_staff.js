@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const {mwn} = require('mwn');
-const { default: title } = require('mwn/build/title');
 
 function wikiLogin() {
     try {
@@ -10,6 +9,8 @@ function wikiLogin() {
     }
 }
 
+
+//Im so sorry you can't see me using a proper command handler
 module.exports = async (message, client, botWiki, prefix) => {
 
 const args = message.content.slice(prefix.length).split(/ /);

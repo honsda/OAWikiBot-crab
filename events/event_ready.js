@@ -15,7 +15,7 @@ module.exports = async (client) => {
 	{magentaBright Serving ${usersserver} users, ${serverssize} servers, ${channelssize} channels.}
 	`);
 // funnybot activity
-	const activities_list = [
+	const larplist = [
 		'quan',
 		'bub',
         'oplk is relevant',
@@ -33,8 +33,8 @@ module.exports = async (client) => {
 		'me swp fan big'
 	];
 	setInterval(() => {
-		const index = Math.floor(Math.random() * (activities_list.length - 1) + 1);
-		client.user.setActivity(activities_list[index], {
+		const index = Math.floor(Math.random() * (larplist.length - 1) + 1);
+		client.user.setActivity(larplist[index], {
 			type: 'WATCHING',
 		}).catch(console.error);
 	}, 10000);

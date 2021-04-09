@@ -1,3 +1,4 @@
 node_modules
 gzor.json
 Procfile
+.gitignore

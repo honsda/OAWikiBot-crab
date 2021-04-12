@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const chalk = require('chalk');
 const proj = require('../package.json');
 //fart
-module.exports = async (client) => {
+module.exports = async (client, botWiki) => {
     const serverssize = await client.guilds.cache.size;
 	var usersserver = client.users.cache.size;
 	const channelssize = await client.channels.cache.size;
@@ -38,4 +38,14 @@ module.exports = async (client) => {
 			type: 'WATCHING',
 		}).catch(console.error);
 	}, 10000);
+	botWiki.login()
+	const sgld = await client.guilds.cache.find(g => g.id === '810484087008919573')
+	const sch = sgld.channels.cache.find(ch => ch.id === '830815632055730236');
+	/*sch.send({embed: new Discord.MessageEmbed()
+    	.setTitle('Logging in...')
+    	.setColor(0xD8D8D8)
+	})*/
+	sch.send(`
+	Logging in...
+	`)
 };

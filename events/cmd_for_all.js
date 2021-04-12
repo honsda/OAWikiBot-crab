@@ -92,5 +92,5 @@ else if(command === 'cmd') {
         .setDescription('\`login\`, \`display_img\`, \`upload_img\`, \`getimg\`, \`getimg_free\`')
         .setColor(0xEEEEEE)
         })
-}
+    }
 }

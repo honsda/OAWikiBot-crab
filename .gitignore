@@ -2,3 +2,5 @@ node_modules
 gzor.json
 Procfile
 b.rar
+package-lock.json
+package.json

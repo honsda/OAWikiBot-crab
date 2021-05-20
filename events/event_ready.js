@@ -41,11 +41,8 @@ module.exports = async (client, botWiki) => {
 	botWiki.login()
 	const sgld = await client.guilds.cache.find(g => g.id === '810484087008919573')
 	const sch = sgld.channels.cache.find(ch => ch.id === '830815632055730236');
-	/*sch.send({embed: new Discord.MessageEmbed()
-    	.setTitle('Logging in...')
+	sch.send({embed: new Discord.MessageEmbed()
+    	.setDescription('**Logging in...**')
     	.setColor(0xD8D8D8)
-	})*/
-	sch.send(`
-	Logging in...
-	`)
+	});
 };

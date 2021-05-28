@@ -127,6 +127,8 @@ mcb.on('kicked', (reason) => {
     }, 10000);
 })
 
+var joins = 0;
+
 //LOGIN AND GO THRU PORTAL
 mcb.on('login', () => {
     mcb.chat(`/login ${p} ${p}`)
@@ -134,6 +136,105 @@ mcb.on('login', () => {
     setTimeout(() => {
         mcb.setControlState('forward', false)
     }, 20000)
+    if (joins == 0) joins = 1;
+    if(joins == 1) {
+        setTimeout(() => {
+            //const farted = botWiki.read(`${fart[index]}`).then(pg => {pg.revisions[0].content})
+            setInterval(() => {
+                mcb.setControlState('back', false)
+                mcb.setControlState('forward', true)
+                mcb.setControlState('jump', true)
+                setTimeout(() => {
+                    mcb.setControlState('forward', false)
+                    mcb.setControlState('back', true)
+                    mcb.setControlState('jump', false)
+                }, 2500)
+            }, 5000)
+            setInterval(() => {
+                mcb.setControlState('left', true)
+                mcb.setControlState('right', false)
+                setTimeout(() => {
+                    mcb.setControlState('left', false)
+                    mcb.setControlState('right', true)
+                }, 5000)
+            }, 7500)
+            //SPAMMER
+            setInterval(() => {    
+                const fart = [
+                    'SWP360',
+                    'Honsda',
+                    'TheUnknown20',
+                    'LJKMagic',
+                    'N2N5',
+                    'Kazpia',
+                    'April_Fools_Map_2021',
+                    'Java',
+                    'Owl',
+                    'OpenAnarchy'
+                ]   
+                var id = 0;
+                //;
+                //let trol = await botWiki.read(`${fart[index]}`).then(pg => {return `${pg.revisions[0].content.slice(30, 60)}`})
+                const i = Math.floor(Math.random() * (fart.length - 1) + 1);
+                mcb.chat(`${Math.floor(Math.random() * 100) + 1}-Check out ${fart[randIndex(fart)]}'s Wiki Page! on OAWiki. [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
+                setTimeout(() => {
+                    const fart2 = [
+                        'Type oa.cmds to get a list of commands!结晶度qq',
+                        '结晶度qqTry oa.cmds to get commands.',
+                        'To get interactives, do oa.cmds칗␩䫴␩⶛㳸長fart',
+                        '칗␩䫴␩⶛㳸長fartTo get commands, type oa.cmds'
+                    ]
+                    const id = Math.floor(Math.random() * (fart2.length - 1) + 1);
+                    //const index = Math.floor(Math.random() * (fart2.length - 1) + 1);
+                    mcb.chat(`${Math.floor(Math.random() * 100) + 1}-${fart2[randIndex(fart2)]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
+                    
+                }, 40000);
+               /* setTimeout(() => {
+                    const i = Math.floor(Math.random() * (fart.length - 1) + 1);
+                    mcb.chat(`(${Math.floor(Math.random() * 100) + 1}) https://openanarchywiki.miraheze.org/wiki/${fart[randIndex(fart)]}`)
+                }, 20000);*/
+                setTimeout(() => {
+                    const farted = [
+                        '䫴␩⶛㳸長�',
+                        '칗␩䫴␩⶛㳸長fart',
+                        'quang䫴�quan',
+                        '结晶度qq',
+                        '⶛farthaha칗␩',
+                        'funny䫴␩⶛',
+                        't剈궦佔칗rr'
+                    ]
+                    const i = Math.floor(Math.random() * (farted.length - 1) + 1);
+                    mcb.chat(`(${Math.floor(Math.random() * 100) + 1}) ${farted[randIndex(farted)]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
+                }, 10000);
+            }, 60000);
+        }, 20000);
+        
+        mcb.on('death', () => {
+            const emb = [
+                `Imagine killing  a bot lmao`,
+                `*cutely dies*`,
+                `"alr let me waste  my time killing a bot"`,
+                `Imagine killing  a bot lmfao`,
+                `*cutely dies*`,
+                `"alr let me waste  my time killing a bot"`,
+                `Imagine killing  a bot lmao`
+            ]
+        /*    var i;
+            if (i > emb.length) {
+                var i = 0;
+            }
+            else if(isNaN(i)) {
+                var i = 0;
+            }
+             else {
+                var i = i + 1
+            }*/
+            const i = Math.floor(Math.random() * (emb.length - 1) + 1);
+            mcb.chat(`> ${Math.floor(Math.random() * 100) + 1}-${emb[i]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
+            /*randIndex(emb) + Math.floor(Math.random() * 2)
+            //console.log(i)*/
+        })
+    }
 })
 
 
@@ -141,104 +242,6 @@ mcb.on('login', () => {
 function randIndex(arr) {
     return (Math.floor(Math.random() * arr.length));
 }
-    //ANTI AFKs
-
-setTimeout(() => {
-    //const farted = botWiki.read(`${fart[index]}`).then(pg => {pg.revisions[0].content})
-    setInterval(() => {
-        mcb.setControlState('back', false)
-        mcb.setControlState('forward', true)
-        mcb.setControlState('jump', true)
-        setTimeout(() => {
-            mcb.setControlState('forward', false)
-            mcb.setControlState('back', true)
-            mcb.setControlState('jump', false)
-        }, 2500)
-    }, 5000)
-    setInterval(() => {
-        mcb.setControlState('left', true)
-        mcb.setControlState('right', false)
-        setTimeout(() => {
-            mcb.setControlState('left', false)
-            mcb.setControlState('right', true)
-        }, 5000)
-    }, 7500)
-    //SPAMMER
-    setInterval(() => {    
-        const fart = [
-            'SWP360',
-            'Honsda',
-            'TheUnknown20',
-            'LJKMagic',
-            'N2N5',
-            'Kazpia',
-            'April_Fools_Map_2021',
-            'Java',
-            'Owl',
-            'OpenAnarchy'
-        ]   
-        var id = 0;
-        //;
-        //let trol = await botWiki.read(`${fart[index]}`).then(pg => {return `${pg.revisions[0].content.slice(30, 60)}`})
-        const i = Math.floor(Math.random() * (fart.length - 1) + 1);
-        mcb.chat(`${Math.floor(Math.random() * 100) + 1}-Check out ${fart[randIndex(fart)]}'s Wiki Page! on OAWiki. [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
-        setTimeout(() => {
-            const fart2 = [
-                'Type oa.cmds to get a list of commands!结晶度qq',
-                '结晶度qqTry oa.cmds to get commands.',
-                'To get interactives, do oa.cmds칗␩䫴␩⶛㳸長fart',
-                '칗␩䫴␩⶛㳸長fartTo get commands, type oa.cmds'
-            ]
-            const id = Math.floor(Math.random() * (fart2.length - 1) + 1);
-            //const index = Math.floor(Math.random() * (fart2.length - 1) + 1);
-            mcb.chat(`${Math.floor(Math.random() * 100) + 1}-${fart2[randIndex(fart2)]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
-            
-        }, 40000);
-       /* setTimeout(() => {
-            const i = Math.floor(Math.random() * (fart.length - 1) + 1);
-            mcb.chat(`(${Math.floor(Math.random() * 100) + 1}) https://openanarchywiki.miraheze.org/wiki/${fart[randIndex(fart)]}`)
-        }, 20000);*/
-        setTimeout(() => {
-            const farted = [
-                '䫴␩⶛㳸長�',
-                '칗␩䫴␩⶛㳸長fart',
-                'quang䫴�quan',
-                '结晶度qq',
-                '⶛farthaha칗␩',
-                'funny䫴␩⶛',
-                't剈궦佔칗rr'
-            ]
-            const i = Math.floor(Math.random() * (farted.length - 1) + 1);
-            mcb.chat(`(${Math.floor(Math.random() * 100) + 1}) ${farted[randIndex(farted)]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
-        }, 10000);
-    }, 60000);
-}, 20000);
-
-mcb.on('death', () => {
-    const emb = [
-        `Imagine killing  a bot lmao`,
-        `*cutely dies*`,
-        `"alr let me waste  my time killing a bot"`,
-        `Imagine killing  a bot lmfao`,
-        `*cutely dies*`,
-        `"alr let me waste  my time killing a bot"`,
-        `Imagine killing  a bot lmao`
-    ]
-/*    var i;
-    if (i > emb.length) {
-        var i = 0;
-    }
-    else if(isNaN(i)) {
-        var i = 0;
-    }
-     else {
-        var i = i + 1
-    }*/
-    const i = Math.floor(Math.random() * (emb.length - 1) + 1);
-    mcb.chat(`> ${Math.floor(Math.random() * 100) + 1}-${emb[i]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
-    /*randIndex(emb) + Math.floor(Math.random() * 2)
-    //console.log(i)*/
-})
 
 const chatMcb = require('./events/mcb/chat.js')(mcb)
 mcb.on('chat', (username, message) => {

@@ -118,7 +118,7 @@ client.on('message', message => {
 mcb.on('kicked', (reason) => {
     console.log(reason)
    setTimeout(() => {
-        mcb.connect({
+        mcb = mineflayer.createBot({
             host: 'openanarchy.org',
             username: 'OAWikiB0t',
             port: 25565,
@@ -136,7 +136,7 @@ mcb.on('login', () => {
     setTimeout(() => {
         mcb.setControlState('forward', false)
     }, 20000)
-    if (joins == 0) joins = 1;
+    joins++
     if(joins == 1) {
         setTimeout(() => {
             //const farted = botWiki.read(`${fart[index]}`).then(pg => {pg.revisions[0].content})

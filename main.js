@@ -117,14 +117,12 @@ client.on('message', message => {
 //LOG KICK REASON
 mcb.on('kicked', (reason) => {
     console.log(reason)
-   setTimeout(() => {
-        mcb = mineflayer.createBot({
-            host: 'openanarchy.org',
-            username: 'OAWikiB0t',
-            port: 25565,
-            version: false
-        })
-    }, 10000);
+    mcb.connect({
+        host: 'openanarchy.org',
+        username: 'OAWikiB0t',
+        port: 25565,
+        version: false
+    })
 })
 
 var joins = 0;
@@ -175,8 +173,8 @@ mcb.on('login', () => {
                 var id = 0;
                 //;
                 //let trol = await botWiki.read(`${fart[index]}`).then(pg => {return `${pg.revisions[0].content.slice(30, 60)}`})
-                const i = Math.floor(Math.random() * (fart.length - 1) + 1);
-                mcb.chat(`${Math.floor(Math.random() * 100) + 1}-Check out ${fart[randIndex(fart)]}'s Wiki Page! on OAWiki. [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
+                //const i = Math.floor(Math.random() * (fart.length - 1) + 1);
+                //mcb.chat(`${Math.floor(Math.random() * 100) + 1}-Check out ${fart[randIndex(fart)]}'s Wiki Page! on OAWiki. [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
                 setTimeout(() => {
                     const fart2 = [
                         'Type oa.cmds to get a list of commands!结晶度qq',
@@ -184,16 +182,16 @@ mcb.on('login', () => {
                         'To get interactives, do oa.cmds칗␩䫴␩⶛㳸長fart',
                         '칗␩䫴␩⶛㳸長fartTo get commands, type oa.cmds'
                     ]
-                    const id = Math.floor(Math.random() * (fart2.length - 1) + 1);
+                    //const id = Math.floor(Math.random() * (fart2.length - 1) + 1);
                     //const index = Math.floor(Math.random() * (fart2.length - 1) + 1);
                     mcb.chat(`${Math.floor(Math.random() * 100) + 1}-${fart2[randIndex(fart2)]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
                     
-                }, 40000);
+                }, 60000);
                /* setTimeout(() => {
                     const i = Math.floor(Math.random() * (fart.length - 1) + 1);
                     mcb.chat(`(${Math.floor(Math.random() * 100) + 1}) https://openanarchywiki.miraheze.org/wiki/${fart[randIndex(fart)]}`)
                 }, 20000);*/
-                setTimeout(() => {
+                /*setTimeout(() => {
                     const farted = [
                         '䫴␩⶛㳸長�',
                         '칗␩䫴␩⶛㳸長fart',
@@ -205,7 +203,7 @@ mcb.on('login', () => {
                     ]
                     const i = Math.floor(Math.random() * (farted.length - 1) + 1);
                     mcb.chat(`(${Math.floor(Math.random() * 100) + 1}) ${farted[randIndex(farted)]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
-                }, 10000);
+                }, 10000);*/
             }, 60000);
         }, 20000);
         
@@ -219,20 +217,8 @@ mcb.on('login', () => {
                 `"alr let me waste  my time killing a bot"`,
                 `Imagine killing  a bot lmao`
             ]
-        /*    var i;
-            if (i > emb.length) {
-                var i = 0;
-            }
-            else if(isNaN(i)) {
-                var i = 0;
-            }
-             else {
-                var i = i + 1
-            }*/
             const i = Math.floor(Math.random() * (emb.length - 1) + 1);
-            mcb.chat(`> ${Math.floor(Math.random() * 100) + 1}-${emb[i]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
-            /*randIndex(emb) + Math.floor(Math.random() * 2)
-            //console.log(i)*/
+            mcb.chat(`> ${Math.floor(Math.random() * 100) + 1}-${emb[i]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`);
         })
     }
 })
@@ -247,7 +233,7 @@ const chatMcb = require('./events/mcb/chat.js')(mcb)
 mcb.on('chat', (username, message) => {
     const sgld = client.guilds.cache.find(g => g.id === '810484087008919573')
     const sch = sgld.channels.cache.find(ch => ch.id === '830815632055730236');
-    if (message.includes(`https://`) || message.includes(`http://`)) sch.send(`**<${username}>** [Message contains a link]`)
+    if (message.includes(`https://`) || message.includes(`http://`) || message.includes(`discord.gg/`)) sch.send(`**<${username}>** [Message contains a link]`)
     else sch.send(`**<${username}>** ${message}`)
 })
 //MCB CHAT LOG
@@ -262,9 +248,9 @@ mcb.on('chat', (username, message) => {
     if(command.startsWith('cmds')) {
         var i = 0;
         const antiSpam = [
-            'oa.gay, oa.dong, oa.8ball, oa.coords',
-            'oa.8ball, oa.coords, oa.dong, oa.gay',
-            'oa.dong, oa.coords, oa.gay, oa.8ball'
+            'oa.gay, oa.dong, oa.8ball, oa.coords, oa.locate',
+            'oa.8ball, oa.coords, oa.locate, oa.dong, oa.gay',
+            'oa.dong, oa.locate, oa.coords, oa.gay, oa.8ball'
         ]
         
         mcb.chat(`/msg ${username} (${Math.floor(Math.random() * 100) + 1}) ${antiSpam[randIndex(antiSpam)]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
@@ -272,8 +258,7 @@ mcb.on('chat', (username, message) => {
     else if(command.startsWith('gay')) {
         mcb.chat(`> ${Math.floor(Math.random() * 100) + 1}-${username} is ${Math.floor(Math.random() * 100) + 1}% gay. [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
     }
-    else if(command.startsWith('8ball')) {
-        
+    else if(command.startsWith('8ball')) { 
         const fart3 = [
             'Much Doubt.',
             'No doubt.',
@@ -294,7 +279,12 @@ mcb.on('chat', (username, message) => {
     }
     else if(command.startsWith('dong')) {
         const dong = Math.floor(Math.random() * 33) + 1
-        mcb.chat(`> ${Math.floor(Math.random() * 100) + 1}-${username}'s dong : 8${('=-').repeat(dong / 2)}D [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
+        mcb.chat(`> ${Math.floor(Math.random() * 100) + 1} ${username}'s dong : 8${('=').repeat(dong)}D [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
+    }
+    else if(command.startsWith('locate')) {
+        const i = Math.floor(Math.random() * (999999 - 1) + 1);
+        if (!args[0]) mcb.chat(`> ${username}'s coordinates are ${i}, ${i}.`)
+        else if (args[0]) mcb.chat(`> ${args[0]}'s coordinates are ${i}, ${i}`)
     }
 })
 
@@ -354,27 +344,3 @@ mcb.on('message', (m) => {
         })
     }
 })
-
-
-/*{
-    "json": { "extra": [ [Object] ], "text": '' },
-    "text": '',
-    "extra": [
-      "ChatMessage" {
-        "json": [Object],
-        "text": 'Unknown command. Type "/help" for help.',
-        "bold": undefined,
-        "italic": undefined,
-        underlined: undefined,
-        strikethrough: undefined,
-        obfuscated: undefined,
-        color: undefined
-      }
-    ],
-    bold: undefined,
-    italic: undefined,
-    underlined: undefined,
-    strikethrough: undefined,
-    obfuscated: undefined,
-    color: undefined
-}*/

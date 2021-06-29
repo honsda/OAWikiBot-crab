@@ -92,6 +92,7 @@ client.login(classify.yplrm)
 /////////////////////////////#//#//#//#//#//#//////////////////////////////////////
 /////////////////////////////#//#//#//#//#//#//////////////////////////////////////
 /////////////////////////////###////##///###///////////////////////////////////////
+/*
 const mineflayer = require('mineflayer');
 const prisview = require('prismarine-viewer');
 const b = require('./gzor.json');
@@ -203,7 +204,7 @@ mcb.on('login', () => {
                     ]
                     const i = Math.floor(Math.random() * (farted.length - 1) + 1);
                     mcb.chat(`(${Math.floor(Math.random() * 100) + 1}) ${farted[randIndex(farted)]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
-                }, 10000);*/
+                }, 10000);
             }, 60000);
         }, 20000);
         
@@ -282,9 +283,8 @@ mcb.on('chat', (username, message) => {
         mcb.chat(`> ${Math.floor(Math.random() * 100) + 1} ${username}'s dong : 8${('=').repeat(dong)}D [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
     }
     else if(command.startsWith('locate')) {
-        const i = Math.floor(Math.random() * (999999 - 1) + 1);
-        if (!args[0]) mcb.chat(`> ${username}'s coordinates are ${i}, ${i}.`)
-        else if (args[0]) mcb.chat(`> ${args[0]}'s coordinates are ${i}, ${i}`)
+        if (args[0] == '||' || !args[0]) mcb.chat(`> ${username}'s coordinates are ${Math.floor(Math.random() * (999999 - 1) + 1)}, ${Math.floor(Math.random() * (999999 - 1) + 1)}.`)
+        else if (args[0]) mcb.chat(`> ${args[0]}'s coordinates are ${Math.floor(Math.random() * (999999 - 1) + 1)}, ${Math.floor(Math.random() * (999999 - 1) + 1)}`)
     }
 })
 
@@ -344,3 +344,4 @@ mcb.on('message', (m) => {
         })
     }
 })
+*/

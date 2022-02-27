@@ -233,21 +233,25 @@ function fn(keywords, target) {
     const res = keywords.map(s => new RegExp(`\\b${s}\\b`));
     return res.some(re => target.match(re));
 }
+function countChar(str, letter) {
+    var letter_Count = 0; 
+    for (var position = 0; position < str.length; position++) {
+        if (str.charAt(position) == letter) {letter_Count += 1;}
+    }
+    return letter_Count;
+}
 
 const chatMcb = require('./events/mcb/chat.js')(mcb)
 mcb.on('message', (m) => {
     const message = m.toString();
+    const username = message.slice(0, message.indexOf('>', 1)+1)
+    const msgarg = message.slice(message.indexOf('>', 1)+2)
     const sgld = client.guilds.cache.find(g => g.id === '810484087008919573');
     const sch = sgld.channels.cache.find(ch => ch.id === '830815632055730236');
-    var inside = false;
-    if(message == 'OAWikiB0t has joined the server') inside = true;
-    if(inside) {
-        if (message.includes(`https://`) || message.includes(`http://`) || message.includes(`discord.gg/`)) sch.send(`**<${username}>** [Message contains a link]`)
-        else if (message.startsWith('<')) sch.send(`**<${username}>** ${message}`);
-        else if (!message.startsWith('<')) {
-            if (message.toLowerCase().endsWith('left the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`**${message}**`).setColor(0xff0000)});}
-            else if (message.toLowerCase().endsWith('joined the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`**${message}**`).setColor(0x00ff3c)});}   
-        }
+    if (message.startsWith('<')) {if (message.includes(`https://`) || message.includes(`http://`) || message.includes(`discord.gg/`)) sch.send(`**${username}** [Blocked Message, contains a link]`); else sch.send(`**${username}** ${msgarg}`);}
+    else if (!message.startsWith('<')) {
+        if (message.toLowerCase().endsWith('left the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:inbox_tray: **${message}**`).setColor(0xff0000)});}
+        else if (message.toLowerCase().endsWith('joined the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:outbox_tray: **${message}**`).setColor(0x00ff3c)});}   
     }
 })
 //MCB CHAT LOG

@@ -250,8 +250,8 @@ mcb.on('message', (m) => {
     const sch = sgld.channels.cache.find(ch => ch.id === '830815632055730236');
     if (message.startsWith('<')) {if (message.includes(`https://`) || message.includes(`http://`) || message.includes(`discord.gg/`)) sch.send(`**${username}** [Blocked Message, contains a link]`); else sch.send(`**${username}** ${msgarg}`);}
     else if (!message.startsWith('<')) {
-        if (message.toLowerCase().endsWith('left the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:inbox_tray: **${message}**`).setColor(0xff0000)});}
-        else if (message.toLowerCase().endsWith('joined the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:outbox_tray: **${message}**`).setColor(0x00ff3c)});}   
+        if (message.toLowerCase().endsWith('left the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:outbox_tray: **${message}**`).setColor(0xff0000)});}
+        else if (message.toLowerCase().endsWith('joined the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:inbox_tray: **${message}**`).setColor(0x00ff3c)});}   
     }
 })
 //MCB CHAT LOG

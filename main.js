@@ -241,6 +241,11 @@ function countChar(str, letter) {
     return letter_Count;
 }
 
+//PROPERTIES
+function onlineplayers() {
+    return Object.keys(mcb.players)
+}
+
 const chatMcb = require('./events/mcb/chat.js')(mcb)
 mcb.on('message', (m) => {
     const message = m.toString();
@@ -251,7 +256,8 @@ mcb.on('message', (m) => {
     if (message.startsWith('<')) {if (message.includes(`https://`) || message.includes(`http://`) || message.includes(`discord.gg/`)) sch.send(`**${username}** [Blocked Message, contains a link]`); else sch.send(`**${username}** ${msgarg}`);}
     else if (!message.startsWith('<')) {
         if (message.toLowerCase().endsWith('left the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:outbox_tray: **${message}**`).setColor(0xff0000)});}
-        else if (message.toLowerCase().endsWith('joined the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:inbox_tray: **${message}**`).setColor(0x00ff3c)});}   
+        else if (message.toLowerCase().endsWith('joined the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:inbox_tray: **${message}**`).setColor(0x00ff3c)});}
+        else if (fn(onlineplayers() , message) && !message.startsWith('Welcome OAWikiB0t to OpenAnarchy,')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`:skull_crossbones: **${message}**`)});}
     }
 })
 //MCB CHAT LOG
@@ -334,6 +340,12 @@ client.on('message', message => {
             mcb.chat(`${args.slice(0).join(" ")}`)
         }
     }
+    else if (command === 'players') {
+        if (message.author.id === '206296798724227082') {
+            console.log(mcb.players)
+        }
+    }
+
     else if(command === 'mcb_kill') {
         if (message.author.id === '206296798724227082') {
             mcb.chat('/kill')

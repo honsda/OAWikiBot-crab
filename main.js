@@ -207,7 +207,7 @@ mcb.on('login', () => {
                 }, 30000);
             }, 60000);
         }, 20000);
-        
+        /*
         mcb.on('death', () => {
             const emb = [
                 `Imagine killing  a bot lmao`,
@@ -220,7 +220,7 @@ mcb.on('login', () => {
             ]
             const i = Math.floor(Math.random() * (emb.length - 1) + 1);
             mcb.chat(`> ${Math.floor(Math.random() * 100) + 1}-${emb[i]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`);
-        })
+        })*/
     }
 })
 

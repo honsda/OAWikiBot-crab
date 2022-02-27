@@ -18,6 +18,7 @@ module.exports = async (mcb) => {
             else return `${d.getHours()}:${d.getMinutes()}`
         }
         if (m.toString().startsWith('Please stop spamming!'))  console.log(chalk`{bold.gray [${dateAuto(t)}]} {redBright ${m.toString()}}`)
+        else if (m.toString().startsWith('You cannot talk')) console.log(chalk`{bold.gray [${dateAuto(t)}]} {redBright ${m.toString()}}`);
         else if (!m.toString().startsWith('<')) console.log(chalk`{bold.gray [${dateAuto(t)}]} {yellow ${m.toString()}}`)
         else if (countChar(m.toString(), '>') == 2) {
             const arrowEnd = m.toString().lastIndexOf('>');

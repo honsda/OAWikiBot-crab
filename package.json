@@ -1,6 +1,6 @@
 {
   "name": "oawikibot",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Bot for OA Wiki",
   "main": "main.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "moment": "^2.29.1",
     "ms": "^2.1.3",
     "mwn": "^0.10.3",
+    "pm2": "^5.2.0",
     "prismarine-viewer": "^1.19.2"
   }
 }

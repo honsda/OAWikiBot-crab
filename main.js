@@ -92,7 +92,7 @@ client.login(classify.yplrm)
 /////////////////////////////#//#//#//#//#//#//////////////////////////////////////
 /////////////////////////////#//#//#//#//#//#//////////////////////////////////////
 /////////////////////////////###////##///###///////////////////////////////////////
-/*
+
 const mineflayer = require('mineflayer');
 const prisview = require('prismarine-viewer');
 const b = require('./gzor.json');
@@ -192,7 +192,7 @@ mcb.on('login', () => {
                     const i = Math.floor(Math.random() * (fart.length - 1) + 1);
                     mcb.chat(`(${Math.floor(Math.random() * 100) + 1}) https://openanarchywiki.miraheze.org/wiki/${fart[randIndex(fart)]}`)
                 }, 20000);*/
-                /*setTimeout(() => {
+                setTimeout(() => {
                     const farted = [
                         '䫴␩⶛㳸長�',
                         '칗␩䫴␩⶛㳸長fart',
@@ -204,7 +204,7 @@ mcb.on('login', () => {
                     ]
                     const i = Math.floor(Math.random() * (farted.length - 1) + 1);
                     mcb.chat(`(${Math.floor(Math.random() * 100) + 1}) ${farted[randIndex(farted)]} [${new RandExp(/([a-f0-9]{12})/).gen()}]`)
-                }, 10000);
+                }, 30000);
             }, 60000);
         }, 20000);
         
@@ -229,13 +229,26 @@ mcb.on('login', () => {
 function randIndex(arr) {
     return (Math.floor(Math.random() * arr.length));
 }
+function fn(keywords, target) {
+    const res = keywords.map(s => new RegExp(`\\b${s}\\b`));
+    return res.some(re => target.match(re));
+}
 
 const chatMcb = require('./events/mcb/chat.js')(mcb)
-mcb.on('chat', (username, message) => {
-    const sgld = client.guilds.cache.find(g => g.id === '810484087008919573')
+mcb.on('message', (m) => {
+    const message = m.toString();
+    const sgld = client.guilds.cache.find(g => g.id === '810484087008919573');
     const sch = sgld.channels.cache.find(ch => ch.id === '830815632055730236');
-    if (message.includes(`https://`) || message.includes(`http://`) || message.includes(`discord.gg/`)) sch.send(`**<${username}>** [Message contains a link]`)
-    else sch.send(`**<${username}>** ${message}`)
+    var inside = false;
+    if(message == 'OAWikiB0t has joined the server') inside = true;
+    if(inside) {
+        if (message.includes(`https://`) || message.includes(`http://`) || message.includes(`discord.gg/`)) sch.send(`**<${username}>** [Message contains a link]`)
+        else if (message.startsWith('<')) sch.send(`**<${username}>** ${message}`);
+        else if (!message.startsWith('<')) {
+            if (message.toLowerCase().endsWith('left the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`**${message}**`).setColor(0xff0000)});}
+            else if (message.toLowerCase().endsWith('joined the server')) {sch.send({ embed: new Discord.MessageEmbed().setDescription(`**${message}**`).setColor(0x00ff3c)});}   
+        }
+    }
 })
 //MCB CHAT LOG
 
@@ -291,13 +304,15 @@ mcb.on('chat', (username, message) => {
 //BOT VIEWER
 mcb.once('spawn', () => {
     mineflayerViewer(mcb, { port: 3007, firstPerson: false }) // port is the minecraft server port, if first person is false, you get a bird's-eye view
-    mcb.chat(`/skin url https://cdn.discordapp.com/attachments/749976047298281602/831442231297703956/fe5d195f3712094ea55b93776221730c096029da.png`)
-    mcb.addChatPattern('unk_cmd', /unknown command./, { parse: true, repeat: false })
-    mcb.chat(`/login ${p}`)
-    mcb.setControlState('forward', true)
     setTimeout(() => {
-        mcb.setControlState('forward', false)
-    }, 20000)
+        mcb.chat(`/skin url https://cdn.discordapp.com/attachments/749976047298281602/831442231297703956/fe5d195f3712094ea55b93776221730c096029da.png`)
+        mcb.addChatPattern('unk_cmd', /unknown command./, { parse: true, repeat: false })
+        mcb.chat(`/login ${p}`)
+        mcb.setControlState('forward', true)
+        setTimeout(() => {
+            mcb.setControlState('forward', false)
+        }, 20000)
+    }, 5000);
 })
 
 //DISCORD-MC
@@ -334,14 +349,25 @@ client.on('message', message => {
     }
 })
 
+var declinedmsg = 0;
+
 mcb.on('message', (m) => { 
     if(m.toString().startsWith("You cannot talk until you have moved!")) {
         const sgld = client.guilds.cache.find(g => g.id === '810484087008919573')
         const sch = sgld.channels.cache.find(ch => ch.id === '830815632055730236');
-        sch.send({ embed: new Discord.MessageEmbed()
-            .setDescription("**Bot haven't moved yet, can't talk.**")
-            .setColor(0xffdb00)
-        })
+        if (declinedmsg != 3) {
+            sch.send({ embed: new Discord.MessageEmbed()
+                .setDescription("**Bot hasn't moved yet, can't talk.**")
+                .setColor(0xffdb00)
+            })
+            declinedmsg++
+        }
+        else if (declinedmsg == 3 || declinedmsg >= 3) {
+            sch.send({ embed: new Discord.MessageEmbed()
+                .setDescription("**Bot hasn't moved yet, can't talk. Respawning...**")
+                .setColor(0xffdb00)
+            })
+            mcb.chat('/kill')
+        }
     }
 })
-*/

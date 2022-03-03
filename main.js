@@ -118,12 +118,6 @@ client.on('message', message => {
 //LOG KICK REASON
 mcb.on('kicked', (reason) => {
     console.log(reason)
-    mcb.connect({
-        host: 'openanarchy.org',
-        username: 'OAWikiB0t',
-        port: 25565,
-        version: false
-    })
 })
 
 var joins = 0;

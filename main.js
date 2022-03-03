@@ -6,6 +6,7 @@ const ms = require('ms')
 const moment = require('moment')
 const long = require('long');
 const RandExp = require('randexp')
+const pm2 = require('pm2');
 
 const fs = require('fs');
 
@@ -118,7 +119,7 @@ client.on('message', message => {
 //LOG KICK REASON
 mcb.on('kicked', (reason) => {
     console.log(reason);
-    process.exit();
+    pm2.connect(function() {pm2.restart(0)})
 })
 
 var joins = 0;

@@ -340,10 +340,12 @@ client.on('message', message => {
             mcb.chat(`${args.slice(0).join(" ")}`)
         }
     }
-    else if (command === 'players') {
-        if (message.author.id === '206296798724227082') {
-            console.log(mcb.players)
-        }
+    else if (command === 'mtab') {
+        message.channel.send({ embed: new Discord.MessageEmbed()
+            .setTitle(`Current players online: ${onlineplayers().length}`)
+            .setDescription(`${onlineplayers().join(', ')}`)
+            .setColor(0xEEEEEE)
+        })
     }
 
     else if(command === 'mkill') {

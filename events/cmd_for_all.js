@@ -86,12 +86,12 @@ else if(command === 'login') {
     .setColor(0xEEEEEE)
     }))
     }
-else if(command === 'cmd') {
+else if(command.startsWith('cmd') || command == 'help') {
     message.channel.send({ embed: new Discord.MessageEmbed()
         .setTitle('Commands')
         .addFields([
             {name: '**Wiki Commands**',value: '\`login\`, \`display_img\`, \`upload_img\`, \`getimg\`, \`getimg_free\`'},
-            {name: '**MC Bot Commands',value: '\`mchat\`, \`mkill\`, \`mraw\`, \`mcmd\`'}
+            {name: '**MC Bot Commands**',value: '\`mchat\`, \`mkill\`, \`mraw\`, \`mcmd\`, \`mtab\`'}
         ])
         .setColor(0xEEEEEE)
         })

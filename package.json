@@ -4,7 +4,14 @@
   "description": "Bot for OA Wiki",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js",
+    "start-pm2": "pm2-runtime start ecosystem.config.js --env production",
+    "startpm2": "pm2 start main.js",
+    "statuspm2": "pm2 status",
+    "savesetuppm2": "pm2 save",
+    "watchpm2": "pm2 start main.js --watch",
+    "initpm2": "pm2 init"
   },
   "author": "Honsda",
   "license": "ISC",

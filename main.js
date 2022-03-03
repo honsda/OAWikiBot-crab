@@ -117,7 +117,8 @@ client.on('message', message => {
 })
 //LOG KICK REASON
 mcb.on('kicked', (reason) => {
-    console.log(reason)
+    console.log(reason);
+    process.exit();
 })
 
 var joins = 0;
@@ -341,7 +342,6 @@ client.on('message', message => {
             .setColor(0xEEEEEE)
         })
     }
-
     else if(command === 'mkill') {
         if (message.author.id === '206296798724227082') {
             mcb.chat('/kill')

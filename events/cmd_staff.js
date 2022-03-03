@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const pm2 = require('pm2');
 const {mwn} = require('mwn');
 //fart
 function wikiLogin() {
@@ -127,6 +128,14 @@ else if(command === 'syslocal_img') {
           name: `${args[0]}`
        }]
     })
+}
+//SIMPLY EXITS THE PROCESS, SHUTS DOWN THE PROCESS
+else if(command === 'fshutdown') {
+    message.channel.send({ embed: new Discord.MessageEmbed()
+        .setTitle('Force shutting down...')
+    }).then(() => {
+        pm2.connect(function() {pm2.restart(0)})
+    });
 }
 //DISPLAYS TEMPORARY IMAGE IN LOCAL SYSTEM
 /*else if(command === 'display_img') {

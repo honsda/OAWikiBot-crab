@@ -89,7 +89,10 @@ else if(command === 'login') {
 else if(command === 'cmd') {
     message.channel.send({ embed: new Discord.MessageEmbed()
         .setTitle('Commands')
-        .setDescription('\`login\`, \`display_img\`, \`upload_img\`, \`getimg\`, \`getimg_free\`')
+        .addFields([
+            {name: '**Wiki Commands**',value: '\`login\`, \`display_img\`, \`upload_img\`, \`getimg\`, \`getimg_free\`'},
+            {name: '**MC Bot Commands',value: '\`mchat\`, \`mkill\`, \`mraw\`, \`mcmd\`'}
+        ])
         .setColor(0xEEEEEE)
         })
     }

@@ -332,10 +332,10 @@ client.on('message', message => {
 
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
-    if (command === 'mcb_chat') {
+    if (command === 'mchat') {
         mcb.chat(`${args.slice(0).join(" ")} || From Discord, ${message.author.tag}`)
     }
-    else if (command === 'mcb_rawchat') {
+    else if (command === 'mraw') {
         if (message.author.id === '206296798724227082') {
             mcb.chat(`${args.slice(0).join(" ")}`)
         }
@@ -346,12 +346,12 @@ client.on('message', message => {
         }
     }
 
-    else if(command === 'mcb_kill') {
+    else if(command === 'mkill') {
         if (message.author.id === '206296798724227082') {
             mcb.chat('/kill')
         }
     }
-    else if(command === 'mcb_cmd') {
+    else if(command === 'mcmd') {
         if (message.author.id === '206296798724227082') {
             if(!args[0]) {
                 message.channel.send({ embed: new Discord.MessageEmbed()
